@@ -1,4 +1,21 @@
-const fibsRec = function (n) {
+const fibs = function(n) {
+    const fibArr = [0, 1]
+
+    if (n === 0) {
+        return [];
+    } else if (n === 1) {
+        return [0];
+    }
+
+    for(let i = fibArr.length; i < n; i++) {
+        const newNum = fibArr[fibArr.length - 1] + fibArr[fibArr.length - 2];
+        fibArr.push(newNum);
+    }
+
+    return fibArr
+}
+
+const fibsRec1 = function (n) {
 
     let baseArr = [0, 1, n];
     
@@ -8,7 +25,7 @@ const fibsRec = function (n) {
         } else if (n === 1) {
             return [0];
         } else {
-            return fibsRec(baseArr);
+            return fibsRec1(baseArr);
         }
         
     } else {
@@ -18,7 +35,7 @@ const fibsRec = function (n) {
         if (n.length < length + 1) {
             const newNum = n[n.length - 2] + n[n.length - 3];
             n.splice(-1, 0, newNum);
-            return fibsRec(n);
+            return fibsRec1(n);
             
         } else if (n.length === length + 1) {
             const final = n.slice(0, -1);
@@ -27,7 +44,7 @@ const fibsRec = function (n) {
     }
 }
 
-
+// Alternate solution
 const fibsRec2 = function (length, arr) {
 
     if (length === 1) {
@@ -44,7 +61,7 @@ const fibsRec2 = function (length, arr) {
     if (arr.length < length) {
         const newNum = arr[arr.length - 2] + arr[arr.length - 1];
         arr.push(newNum);
-        return fibsRec(length, arr)
+        return fibsRec2(length, arr)
     }
 
     if (arr.length === length) {
@@ -53,10 +70,14 @@ const fibsRec2 = function (length, arr) {
     
 }
 
-const result1 = fibsRec(10);
-const result2 = fibsRec2(10);
-const answer1 = document.querySelector('p#ass1-1');
-const answer2 = document.querySelector('p#ass1-2');
+const result1 = fibs(8)
+const result2_1 = fibsRec1(8);
+const result2_2 = fibsRec2(8); // Alternate solution
+
+const answer1 = document.querySelector('p#ass1-1 span.value');
+const answer2_1 = document.querySelector('p#ass1-2-1 span.value');
+const answer2_2 = document.querySelector('p#ass1-2-2 span.value');
 
 answer1.textContent = `[${result1}]`;
-answer2.textContent = `[${result2}]`;
+answer2_1.textContent = `[${result2_1}]`;
+answer2_2.textContent = `[${result2_2}]`;
