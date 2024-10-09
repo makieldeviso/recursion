@@ -40,3 +40,7 @@ const answer1_2 = document.querySelector('p#ass2-1-2 span.value')
 
 answer1_1.textContent = `[${mergeResult1}]`;
 answer1_2.textContent = `[${mergeResult2}]`;
+
+
+const array = []
+array.push([].shift())
