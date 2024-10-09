@@ -70,7 +70,17 @@ const fibs = function(n) {
     
 // }
 
-const fibsRec3 = function (arrLength) {
+const fibsRec = function (arrLength) {
+
+    const baseArr = [0, 1];
+
+    if (arrLength === 1) {
+        return [baseArr[0]]
+    }
+
+    if (arrLength === 0) {
+        return []
+    }
 
     const createFibArr = function (fibArr = [0, 1]) {
         
@@ -88,13 +98,63 @@ const fibsRec3 = function (arrLength) {
     return createFibArr()
 }
 
+const fibsSum = function (fibsArr) {
+    const accumulateSum = function (array = fibsArr, currentSum = 0) {
+
+        if (array.length === 0) {
+            return currentSum
+        }
+        
+        const firstNum = Number(array.slice(0, 1));
+        const secondNum = Number(array.slice(1, 2));
+        const newCurrentSum = currentSum + firstNum + secondNum;
+
+        const newArray = array.splice(2);
+
+        return accumulateSum(newArray, newCurrentSum)
+
+    }
+
+    return accumulateSum();
+}
+
+const fibsSum2 = function (array) {
+    return array.reduce((accu, cum) => {
+        return accu + cum
+    }, array[0])
+} 
+
+
+const fibsSum3 = function (array) {
+    let sum = 0;
+    while(array.length > 0) {
+        sum = sum + array[0];
+        array.shift();
+    }
+
+    return sum
+}
+
+const fibsSum4 = function (array) {
+
+    let sum = 0
+    for (let i = 0; i < array.length; i++) {
+        sum = sum + array[i]
+    }
+
+    return sum
+}
+
+
 const result1 = fibs(8)
 // const result2_1 = fibsRec1(8);
 // const result2_2 = fibsRec2(8);
-const result2 = fibsRec3(8); // Updated solution -- Im enlightened now xd
+const result2 = fibsRec(8); // Updated solution
 
 const answer1 = document.querySelector('p#ass1-1 span.value');
 const answer2 = document.querySelector('p#ass1-2 span.value');
 
 answer1.textContent = `[${result1}]`;
 answer2.textContent = `[${result2}]`;
+
+
